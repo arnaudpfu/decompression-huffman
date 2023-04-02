@@ -284,19 +284,19 @@ class Decompressor {
     }
 
     /**
-     * Compute the decompression ratio
+     * Compute the compression ratio
      * 
      * @param outputPath the path of the decompressed file
-     * @return the decompression ratio
+     * @return the compression ratio
      */
-    private double computeDecompressionRatio(String outputPath) {
+    private double computeCompressionRatio(String outputPath) {
         File compressedFile = new File(this.filePath);
         File decompressedFile = new File(outputPath);
 
         double compressedFileSize = compressedFile.length();
         double decompressedFileSize = decompressedFile.length();
 
-        return this.round((1 - (decompressedFileSize / compressedFileSize)) * 100, 2);
+        return this.round((1 - (compressedFileSize / decompressedFileSize)) * 100, 2);
     }
 
     /**
@@ -331,7 +331,7 @@ class Decompressor {
         String outputPath = this.filePath.replace("_comp.bin", ".txt");
         this.writeDecompressedFile(outputPath, encoded);
 
-        System.out.println("Decompression ratio: " + this.computeDecompressionRatio(outputPath) + "%");
+        System.out.println("Decompression ratio: " + this.computeCompressionRatio(outputPath) + "%");
         System.out.println(
                 "Size of a character before decompression: " + this.computeAverageCompressedSizePerChar()
                         + " bits");
